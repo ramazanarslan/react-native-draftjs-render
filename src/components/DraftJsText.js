@@ -6,16 +6,16 @@
 
 // @flow
 
-import React from 'react';
-import { Text } from 'react-native';
+import React from "react";
+import { Text } from "react-native";
 
-import loadAttributes from '../loadAttributes';
+import loadAttributes from "../loadAttributes";
 
-import defaultStyles from './defaultStyles';
-import type { DraftJsTextPropsType } from './types';
+import defaultStyles from "./defaultStyles";
+import type { DraftJsTextPropsType } from "./types";
 
 const DraftJsText = (props: DraftJsTextPropsType): any => {
-  const { text } = props;
+  const { text, customerRenderer } = props;
   let textElements = text;
 
   if (textElements) {
@@ -30,8 +30,17 @@ const DraftJsText = (props: DraftJsTextPropsType): any => {
       type: props.type,
     });
 
-    const customStyle = props.customStyles ? props.customStyles[props.type] : undefined;
+    const customStyle = props.customStyles
+      ? props.customStyles[props.type]
+      : undefined;
     const textAlignStyle = { textAlign: props.data.textAlignment };
+
+    if (customerRenderer)
+      return customerRenderer({
+        style: [defaultStyles[props.type], textAlignStyle, customStyle],
+        value: textElements,
+        ...props.textProps,
+      });
 
     return (
       <Text
@@ -46,7 +55,7 @@ const DraftJsText = (props: DraftJsTextPropsType): any => {
 };
 
 DraftJsText.defaultProps = {
-  text: '',
+  text: "",
   data: {},
   inlineStyles: [],
   navigate: undefined,
