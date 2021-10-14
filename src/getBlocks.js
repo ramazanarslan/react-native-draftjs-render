@@ -27,7 +27,7 @@ type ParamsType = {
   customBlockHandler?: (Object, ParamsType) => any,
   depthMargin?: number,
   textProps: ?Object,
-  customerRenderer: ?any,
+  CustomTextComponentFunction: ?any,
 };
 
 export const ViewAfterList = (props: Object): React$Element<*> => (
@@ -43,7 +43,7 @@ const getBlocks = (params: ParamsType): ?Array<React$Element<*>> => {
     customBlockHandler,
     depthMargin,
     atomicHandler,
-    customerRenderer,
+    CustomTextComponentFunction,
   } = params;
 
   const textProps = params.textProps || {};
@@ -131,7 +131,7 @@ const getBlocks = (params: ParamsType): ?Array<React$Element<*>> => {
               customStyles={customStyles}
               navigate={navigate}
               textProps={textProps}
-              customerRenderer={customerRenderer}
+              CustomTextComponentFunction={CustomTextComponentFunction}
             />
           </View>
         );
@@ -165,7 +165,7 @@ const getBlocks = (params: ParamsType): ?Array<React$Element<*>> => {
               customStyles={customStyles}
               navigate={navigate}
               textProps={textProps}
-              customerRenderer={customerRenderer}
+              CustomTextComponentFunction={CustomTextComponentFunction}
             />
           </View>
         );
@@ -184,7 +184,7 @@ const getBlocks = (params: ParamsType): ?Array<React$Element<*>> => {
               navigate={navigate}
               defaultMarginLeft={depthMargin}
               textProps={textProps}
-              customerRenderer={customerRenderer}
+              CustomTextComponentFunction={CustomTextComponentFunction}
             />
           </View>
         );
@@ -224,7 +224,7 @@ const getBlocks = (params: ParamsType): ?Array<React$Element<*>> => {
               navigate={navigate}
               defaultMarginLeft={depthMargin}
               textProps={textProps}
-              customerRenderer={customerRenderer}
+              CustomTextComponentFunction={CustomTextComponentFunction}
             />
           </View>
         );

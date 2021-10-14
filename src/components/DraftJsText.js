@@ -15,7 +15,7 @@ import defaultStyles from "./defaultStyles";
 import type { DraftJsTextPropsType } from "./types";
 
 const DraftJsText = (props: DraftJsTextPropsType): any => {
-  const { text, customerRenderer } = props;
+  const { text, CustomTextComponentFunction } = props;
   let textElements = text;
 
   if (textElements) {
@@ -35,8 +35,8 @@ const DraftJsText = (props: DraftJsTextPropsType): any => {
       : undefined;
     const textAlignStyle = { textAlign: props.data.textAlignment };
 
-    if (customerRenderer)
-      return customerRenderer({
+    if (CustomTextComponentFunction)
+      return CustomTextComponentFunction({
         style: [defaultStyles[props.type], textAlignStyle, customStyle],
         value: textElements,
         ...props.textProps,
