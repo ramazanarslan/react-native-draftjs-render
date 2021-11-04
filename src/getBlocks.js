@@ -130,7 +130,7 @@ const getBlocks = (params: ParamsType): ?Array<React$Element<*>> => {
               entityMap={contentState.entityMap}
               customStyles={customStyles}
               navigate={navigate}
-              textProps={textProps}
+              textProps={{ ...textProps, blockKey: item.key }}
               CustomTextComponentFunction={CustomTextComponentFunction}
             />
           </View>
@@ -164,7 +164,7 @@ const getBlocks = (params: ParamsType): ?Array<React$Element<*>> => {
               entityMap={contentState.entityMap}
               customStyles={customStyles}
               navigate={navigate}
-              textProps={textProps}
+              textProps={{ ...textProps, blockKey: item.key }}
               CustomTextComponentFunction={CustomTextComponentFunction}
             />
           </View>
@@ -183,7 +183,7 @@ const getBlocks = (params: ParamsType): ?Array<React$Element<*>> => {
               customStyles={customStyles}
               navigate={navigate}
               defaultMarginLeft={depthMargin}
-              textProps={textProps}
+              textProps={{ ...textProps, blockKey: item.key }}
               CustomTextComponentFunction={CustomTextComponentFunction}
             />
           </View>
@@ -223,7 +223,7 @@ const getBlocks = (params: ParamsType): ?Array<React$Element<*>> => {
               customStyles={customStyles}
               navigate={navigate}
               defaultMarginLeft={depthMargin}
-              textProps={textProps}
+              textProps={{ ...textProps, blockKey: item.key }}
               CustomTextComponentFunction={CustomTextComponentFunction}
             />
           </View>
