@@ -18,7 +18,6 @@ import type { OrderedListItemPropsType } from './types';
 
 const styles = StyleSheet.create({
   orderedListItemContainer: {
-    flex: 1,
     flexDirection: 'row',
     alignItems: 'center',
   },

@@ -17,7 +17,6 @@ import type { UnorderedListItemPropsType } from './types';
 
 const styles = StyleSheet.create({
   unorderedListItemContainer: {
-    flex: 1,
     flexDirection: 'row',
     alignItems: 'center',
   },
