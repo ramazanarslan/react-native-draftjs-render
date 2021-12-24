@@ -42,13 +42,13 @@ const UnorderedListItem = (props: UnorderedListItemPropsType): any => {
 
   let marginLeft = 0;
   marginLeft = unorderedListItemCustomStyleBullet && unorderedListItemCustomStyleBullet.marginLeft
-    ? depth * unorderedListItemCustomStyleBullet.marginLeft
-    : depth * defaultMarginLeft;
+    ? (depth + 1) * unorderedListItemCustomStyleBullet.marginLeft
+    : (depth + 1) * defaultMarginLeft;
 
   return (
     <View style={[styles.unorderedListItemContainer, unorderedListItemCustomStyleContainer]}>
       <View style={[styles.unorderedListItemBullet, unorderedListItemCustomStyleBullet,
-        { marginLeft }]}
+      { marginLeft }]}
       />
       <DraftJsText
         {...props}

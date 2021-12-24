@@ -7,7 +7,7 @@
 // @flow
 
 import React from "react";
-import { View } from "react-native";
+import { View, Text } from "react-native";
 
 import BlockQuote from "./components/BlockQuote";
 import DraftJsText from "./components/DraftJsText";
@@ -100,6 +100,29 @@ const getBlocks = (params: ParamsType): ?Array<React$Element<*>> => {
     return null;
   };
 
+  const getOrderedListItemNumber = (type, itemData) => {
+    const parentIndex = counters[type].count;
+    let number = 0;
+
+    // when new ordered list reset childCounters
+    if (parentIndex === 0) {
+      counters[type].childCounters = [];
+    }
+
+    if (itemData.depth !== undefined && itemData.depth >= 1) {
+      if (counters[type].childCounters[parentIndex] === undefined) {
+        counters[type].childCounters[parentIndex] = 0;
+      }
+      counters[type].childCounters[parentIndex] += 1;
+      number = counters[type].childCounters[parentIndex];
+    } else {
+      counters[type].count += 1;
+      number = counters[type].count;
+    }
+
+    return number;
+  }
+
   return contentState.blocks.map((item: Object): React$Element<*> => {
     const itemData = {
       key: item.key,
@@ -139,17 +162,26 @@ const getBlocks = (params: ParamsType): ?Array<React$Element<*>> => {
 
       case "atomic": {
         if (atomicHandler) {
-          const viewBefore = checkCounter(counters);
-          const atomic = atomicHandler(item, contentState.entityMap);
-          if (viewBefore) {
-            return (
-              <View key={generateKey()}>
-                {viewBefore}
-                {atomic}
-              </View>
+          const { AtomicNode, oldType } = atomicHandler(item, contentState.entityMap);
+
+          let listIndicator = null;
+          if (oldType === "unordered-list-item") listIndicator = <View style={customStyles.unorderedListItemBullet} />
+          else if (oldType === "ordered-list-item") {
+            const number = getOrderedListItemNumber(oldType, itemData);
+            listIndicator = (
+              <Text style={customStyles.orderedListItemNumber}>
+                {number}
+                {"."}
+              </Text>
             );
           }
-          return atomic;
+
+          return (
+            <View key={generateKey()} style={{ flexDirection: "row", alignItems: "center" }}>
+              {listIndicator}
+              {AtomicNode}
+            </View>
+          );
         }
         return item;
       }
@@ -191,25 +223,7 @@ const getBlocks = (params: ParamsType): ?Array<React$Element<*>> => {
       }
 
       case "ordered-list-item": {
-        const { type } = item;
-        const parentIndex = counters[type].count;
-        let number = 0;
-
-        // when new ordered list reset childCounters
-        if (parentIndex === 0) {
-          counters[type].childCounters = [];
-        }
-
-        if (itemData.depth !== undefined && itemData.depth >= 1) {
-          if (counters[type].childCounters[parentIndex] === undefined) {
-            counters[type].childCounters[parentIndex] = 0;
-          }
-          counters[type].childCounters[parentIndex] += 1;
-          number = counters[type].childCounters[parentIndex];
-        } else {
-          counters[type].count += 1;
-          number = counters[type].count;
-        }
+        const number = getOrderedListItemNumber(item.type, itemData);
 
         const viewBefore = checkCounter(counters["unordered-list-item"]);
         return (

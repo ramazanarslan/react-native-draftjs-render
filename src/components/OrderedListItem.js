@@ -40,12 +40,9 @@ const OrderedListItem = (props: OrderedListItemPropsType): any => {
   const orderedListItemCustomStyleContainer = customStyles && customStyles.orderedListItemContainer;
   const orderedListItemCustomStyleNumber = customStyles && customStyles.orderedListItemNumber;
 
-  const marginLeftWithDepth = (
+  const marginLeft = (
     orderedListItemCustomStyleNumber && orderedListItemCustomStyleNumber.marginLeft)
-    ? depth * orderedListItemCustomStyleNumber.marginLeft : depth * defaultMarginLeft;
-
-  const marginLeftWithoutDepth = 24;
-  const marginLeft = depth > 0 ? marginLeftWithDepth : marginLeftWithoutDepth;
+    ? (depth + 1) * orderedListItemCustomStyleNumber.marginLeft : (depth + 1) * defaultMarginLeft;
 
   return (
     <View style={[styles.orderedListItemContainer, orderedListItemCustomStyleContainer]}>
