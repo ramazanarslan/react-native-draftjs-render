@@ -32,7 +32,7 @@ const OrderedListItem = (props) => {
     customStyles,
     depth,
     defaultMarginLeft,
-    key: itemKey,
+    textProps,
     ...restProps
   } = props;
 
@@ -52,7 +52,8 @@ const OrderedListItem = (props) => {
         {separator}
       </Text>
       <DraftJsText
-        key={itemKey}
+        key={textProps?.blockKey}
+        textProps={textProps}
         {...restProps}
       />
     </View>

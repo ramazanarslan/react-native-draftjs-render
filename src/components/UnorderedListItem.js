@@ -28,7 +28,7 @@ const styles = StyleSheet.create({
 });
 
 const UnorderedListItem = (props) => {
-  const { customStyles, depth, defaultMarginLeft, key: itemKey, ...restProps } = props;
+  const { customStyles, depth, defaultMarginLeft, textProps, ...restProps } = props;
   const unorderedListItemCustomStyleContainer = customStyles
     ? customStyles.unorderedListItemContainer
     : undefined;
@@ -48,7 +48,8 @@ const UnorderedListItem = (props) => {
       { marginLeft }]}
       />
       <DraftJsText
-        key={itemKey}
+        key={textProps?.blockKey}
+        textProps={textProps}
         {...restProps}
       />
     </View>

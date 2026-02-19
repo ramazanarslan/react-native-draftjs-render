@@ -30,7 +30,7 @@ const DraftJsText = (props) => {
     const customStyle = props.customStyles
       ? props.customStyles[props.type]
       : undefined;
-    const textAlignStyle = { textAlign: props.data.textAlignment };
+    const textAlignStyle = { textAlign: props.data?.textAlignment ?? 'left' };
 
     if (CustomTextComponentFunction)
       return CustomTextComponentFunction({
