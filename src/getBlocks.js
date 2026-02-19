@@ -13,7 +13,10 @@ import UnorderedListItem from "./components/UnorderedListItem";
 import OrderedListItem from "./components/OrderedListItem";
 import generateKey from "./utils/generateKey";
 
-export const ViewAfterList = (props) => <View {...props} />;
+export const ViewAfterList = (props) => {
+  const { key: itemKey, ...restProps } = props;
+  return <View key={itemKey} {...restProps} />;
+};
 
 const getBlocks = (params) => {
   const {
@@ -180,11 +183,13 @@ const getBlocks = (params) => {
 
       case "blockquote": {
         const viewBefore = checkCounter(counters);
+        const { key: blockQuoteKey, ...restItemData } = itemData;
         return (
           <View key={generateKey()}>
             {viewBefore}
             <BlockQuote
-              {...itemData}
+              key={blockQuoteKey}
+              {...restItemData}
               entityMap={contentState.entityMap}
               customStyles={customStyles}
               navigate={navigate}
@@ -198,11 +203,13 @@ const getBlocks = (params) => {
       case "unordered-list-item": {
         counters[item.type].count += 1;
         const viewBefore = checkCounter(counters["ordered-list-item"]);
+        const { key: unorderedKey, ...restItemDataUnordered } = itemData;
         return (
           <View key={generateKey()}>
             {viewBefore}
             <UnorderedListItem
-              {...itemData}
+              key={unorderedKey}
+              {...restItemDataUnordered}
               entityMap={contentState.entityMap}
               customStyles={customStyles}
               navigate={navigate}
@@ -218,11 +225,13 @@ const getBlocks = (params) => {
         const number = getOrderedListItemNumber(item.type, itemData);
 
         const viewBefore = checkCounter(counters["unordered-list-item"]);
+        const { key: orderedKey, ...restItemDataOrdered } = itemData;
         return (
           <View key={generateKey()}>
             {viewBefore}
             <OrderedListItem
-              {...itemData}
+              key={orderedKey}
+              {...restItemDataOrdered}
               separator={orderedListSeparator}
               counter={number}
               entityMap={contentState.entityMap}

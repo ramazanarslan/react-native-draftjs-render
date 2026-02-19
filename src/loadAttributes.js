@@ -83,8 +83,9 @@ const loadAttributes = (params) => {
       const itemOnPress = getItemOnPress(item, entityMap, navigateFunction);
       if (itemOnPress !== undefined) Object.assign(itemData, { onPress: itemOnPress });
 
+      const { key: itemKey, ...restItemData } = itemData;
       elementList.push((
-        <TextStyled {...itemData} />
+        <TextStyled key={itemKey} {...restItemData} />
       ));
     });
 
