@@ -4,8 +4,6 @@
  * License: MIT
  */
 
-// @flow
-
-const isEmptyObject = (obj: Object): boolean => Object.keys(obj).length === 0;
+const isEmptyObject = (obj) => Object.keys(obj).length === 0;
 
 export default isEmptyObject;

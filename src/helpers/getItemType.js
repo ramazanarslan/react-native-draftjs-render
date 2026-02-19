@@ -4,12 +4,10 @@
  * License: MIT
  */
 
-// @flow
-
-const getItemType = (item: Object): string => {
+const getItemType = (item) => {
   if (item.style) {
     if (Array.isArray(item.style)) {
-      return item.style.map((i: string): string => i.toLowerCase());
+      return item.style.map((i) => i.toLowerCase());
     }
     return item.style.toLowerCase();
   }

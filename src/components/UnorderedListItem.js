@@ -4,8 +4,6 @@
  * License: MIT
  */
 
-// @flow
-
 import React from 'react';
 import {
   View,
@@ -13,7 +11,6 @@ import {
 } from 'react-native';
 
 import DraftJsText from './DraftJsText';
-import type { UnorderedListItemPropsType } from './types';
 
 const styles = StyleSheet.create({
   unorderedListItemContainer: {
@@ -30,7 +27,7 @@ const styles = StyleSheet.create({
   },
 });
 
-const UnorderedListItem = (props: UnorderedListItemPropsType): any => {
+const UnorderedListItem = (props) => {
   const { customStyles, depth, defaultMarginLeft } = props;
   const unorderedListItemCustomStyleContainer = customStyles
     ? customStyles.unorderedListItemContainer

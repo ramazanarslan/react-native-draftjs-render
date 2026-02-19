@@ -4,7 +4,7 @@
  * License: MIT
  */
 
-export default function generateKey(): number {
+export default function generateKey() {
   function s4() {
     return Math.floor((1 + Math.random()) * 0x10000)
       .toString(16)

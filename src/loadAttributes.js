@@ -4,8 +4,6 @@
  * License: MIT
  */
 
-// @flow
-
 import { substring, length } from 'stringz';
 import React from 'react';
 import {
@@ -20,26 +18,14 @@ import flatAttributesList from './flatAttributesList';
 import getItemType from './helpers/getItemType';
 import isEmptyObject from './helpers/isEmptyObject';
 
-export const getItemOnPress = (item: Object, entityMap: ?Object, navigate: Function) => {
+export const getItemOnPress = (item, entityMap, navigate) => {
   if (item.key !== undefined && entityMap && !isEmptyObject(entityMap)) {
-    // $$FlowFixMe entityMap is valid here
     return () => { navigate(entityMap[item.key].data.url); };
   }
   return undefined;
 };
 
-type ParamsType = {
-  text: string,
-  type: string,
-  customStyles?: Object,
-  inlineStyles: Array<Object>,
-  entityRanges: Array<Object>,
-  entityMap: ?Object,
-  navigate?: Function,
-  textProps: ?Object,
-};
-
-const loadAttributes = (params: ParamsType): any => {
+const loadAttributes = (params) => {
   const {
     text,
     customStyles,
@@ -51,11 +37,11 @@ const loadAttributes = (params: ParamsType): any => {
     type,
   } = params;
 
-  const defaultNavigationFn = (url: string) => { Linking.openURL(url); };
+  const defaultNavigationFn = (url) => { Linking.openURL(url); };
   const navigateFunction = navigate || defaultNavigationFn;
   const elementList = [];
   let attributes = inlineStyles ? inlineStyles.concat(entityRanges) : entityRanges;
-  attributes = attributes.sort((a: Object, b: Object): number => a.offset - b.offset);
+  attributes = attributes.sort((a, b) => a.offset - b.offset);
 
   if (attributes.length) {
     const attrs = flatAttributesList(attributes);
@@ -73,7 +59,7 @@ const loadAttributes = (params: ParamsType): any => {
       elementList.push(element);
     }
 
-    attrs.forEach((item: Object, index: number) => {
+    attrs.forEach((item, index) => {
       if (index > 0) {
         const previousItem = attrs[index - 1];
         const offset = previousItem.offset + previousItem.length;

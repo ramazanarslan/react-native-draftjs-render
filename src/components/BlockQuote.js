@@ -4,8 +4,6 @@
  * License: MIT
  */
 
-// @flow
-
 import React from 'react';
 import {
   StyleSheet,
@@ -13,7 +11,6 @@ import {
 } from 'react-native';
 
 import DraftJsText from './DraftJsText';
-import type { BlockQuotePropsType } from './types';
 
 const styles = StyleSheet.create({
   blockquoteContainer: {
@@ -26,7 +23,7 @@ const styles = StyleSheet.create({
   },
 });
 
-const BlockQuote = (props: BlockQuotePropsType): any => {
+const BlockQuote = (props) => {
   const { customStyles } = props;
   const blockquoteCustomStyleContainer = customStyles
     ? customStyles.blockquoteContainer

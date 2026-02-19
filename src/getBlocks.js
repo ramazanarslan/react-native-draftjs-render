@@ -4,8 +4,6 @@
  * License: MIT
  */
 
-// @flow
-
 import React from "react";
 import { View, Text } from "react-native";
 
@@ -15,26 +13,11 @@ import UnorderedListItem from "./components/UnorderedListItem";
 import OrderedListItem from "./components/OrderedListItem";
 import generateKey from "./utils/generateKey";
 
-type ParamsType = {
-  contentState: {
-    blocks: ?Array<*>,
-    entityMap: Object,
-  },
-  customStyles: Object,
-  atomicHandler: Function,
-  navigate?: Function,
-  orderedListSeparator?: string,
-  customBlockHandler?: (Object, ParamsType) => any,
-  depthMargin?: number,
-  textProps: ?Object,
-  CustomTextComponentFunction: ?any,
-};
-
-export const ViewAfterList = (props: Object): React$Element<*> => (
+export const ViewAfterList = (props) => (
   <View {...props} />
 );
 
-const getBlocks = (params: ParamsType): ?Array<React$Element<*>> => {
+const getBlocks = (params) => {
   const {
     contentState,
     customStyles,
@@ -65,7 +48,7 @@ const getBlocks = (params: ParamsType): ?Array<React$Element<*>> => {
     },
   };
 
-  const checkCounter = (counter: Object): ?React$Element<*> => {
+  const checkCounter = (counter) => {
     const myCounter = counter;
 
     // list types
@@ -123,7 +106,7 @@ const getBlocks = (params: ParamsType): ?Array<React$Element<*>> => {
     return number;
   }
 
-  return contentState.blocks.map((item: Object): React$Element<*> => {
+  return contentState.blocks.map((item) => {
     const itemData = {
       key: item.key,
       text: item.text,

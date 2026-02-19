@@ -4,14 +4,12 @@
  * License: MIT
  */
 
-// @flow
-
 import {
   StyleSheet,
   Platform,
 } from 'react-native';
 
-const defaultStyles = (PlatformOS: string): Object => StyleSheet.create({
+const defaultStyles = (PlatformOS) => StyleSheet.create({
   paragraph: {
     fontSize: 14,
     fontWeight: 'normal',

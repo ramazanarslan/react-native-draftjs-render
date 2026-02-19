@@ -4,17 +4,14 @@
  * License: MIT
  */
 
-// @flow
-
 import React from "react";
 import { Text } from "react-native";
 
 import loadAttributes from "../loadAttributes";
 
 import defaultStyles from "./defaultStyles";
-import type { DraftJsTextPropsType } from "./types";
 
-const DraftJsText = (props: DraftJsTextPropsType): any => {
+const DraftJsText = (props) => {
   const { text, CustomTextComponentFunction } = props;
   let textElements = text;
 

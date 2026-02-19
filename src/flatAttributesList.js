@@ -4,21 +4,19 @@
  * License: MIT
  */
 
-// @flow
+const sortInteger = (a, b) => a - b;
+const isLink = (element) => Object.prototype.hasOwnProperty.call(element, 'key');
 
-const sortInteger = (a: number, b: number): number => a - b;
-const isLink = (element: Object): boolean => Object.prototype.hasOwnProperty.call(element, 'key');
-
-const convertStylesIntoNumbers = (styles: Array<Object>): Array<number> => {
+const convertStylesIntoNumbers = (styles) => {
   const numbers = [];
-  styles.forEach((style: Object) => {
+  styles.forEach((style) => {
     numbers.push(style.offset);
     numbers.push(style.offset + style.length);
   });
   return numbers;
 };
 
-const createArrayWithSegments = (numbersList: Array<number>): Array<Array<number>> => {
+const createArrayWithSegments = (numbersList) => {
   const segmentList = [];
   const numbersListLength = numbersList.length;
   for (let i = 0; i < numbersListLength - 1; i += 1) {
@@ -27,14 +25,11 @@ const createArrayWithSegments = (numbersList: Array<number>): Array<Array<number
   return segmentList;
 };
 
-const addTypeToSegments = (
-  segments: Array<Array<number>>,
-  originalStyles: Array<Object>,
-): Array<Object> => {
+const addTypeToSegments = (segments, originalStyles) => {
   const objectList = [];
-  segments.forEach((segment: Array<number>) => {
+  segments.forEach((segment) => {
     const types = [];
-    originalStyles.forEach((style: Object) => {
+    originalStyles.forEach((style) => {
       const length = segment[0] + segment[1];
       if (length > style.offset && length <= style.offset + style.length) {
         if (isLink(style)) {
@@ -56,24 +51,24 @@ const addTypeToSegments = (
   return objectList;
 };
 
-const isOverlap = (styles: Array<Object>): any => {
+const isOverlap = (styles) => {
   let found;
   for (let i = 0; i < styles.length - 1; i += 1) {
     found = styles
-      .find((item: Object): boolean => (
+      .find((item) => (
         item.offset >= styles[i].offset && item.offset <= styles[i].offset + styles[i].length));
     if (found) break;
   }
   return found;
 };
 
-const checkSingleLinkElement = (item: Object) => {
+const checkSingleLinkElement = (item) => {
   if (isLink(item)) {
     Object.assign(item, { style: 'link' });
   }
 };
 
-const flatAttributesList = (attrsList: Array<Object>): Array<Object> => {
+const flatAttributesList = (attrsList) => {
   if (attrsList.length === 1 || !isOverlap(attrsList)) {
     checkSingleLinkElement(attrsList[0]);
     return attrsList;

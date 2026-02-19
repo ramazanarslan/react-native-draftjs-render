@@ -4,8 +4,6 @@
  * License: MIT
  */
 
-// @flow
-
 import React from 'react';
 import {
   Text,
@@ -14,7 +12,6 @@ import {
 } from 'react-native';
 
 import DraftJsText from './DraftJsText';
-import type { OrderedListItemPropsType } from './types';
 
 const styles = StyleSheet.create({
   orderedListItemContainer: {
@@ -28,7 +25,7 @@ const styles = StyleSheet.create({
   },
 });
 
-const OrderedListItem = (props: OrderedListItemPropsType): any => {
+const OrderedListItem = (props) => {
   const {
     counter,
     separator,

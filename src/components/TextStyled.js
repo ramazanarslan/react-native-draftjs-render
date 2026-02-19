@@ -4,15 +4,11 @@
  * License: MIT
  */
 
-// @flow
-
 import React from 'react';
 import {
   Text,
   StyleSheet,
 } from 'react-native';
-
-import type { TextStyledPropsType } from './types';
 
 const styles = StyleSheet.flatten({
   bold: {
@@ -32,13 +28,13 @@ const styles = StyleSheet.flatten({
   },
 });
 
-const getStyles = (itemType: any, customStyles?: Object): any => {
+const getStyles = (itemType, customStyles) => {
   if (!customStyles) return [styles[itemType]];
   if (typeof itemType === 'string') return [styles[itemType], customStyles[itemType]];
 
   const defaultTextStyles = {};
   const customTextStyles = {};
-  itemType.forEach((i: string) => {
+  itemType.forEach((i) => {
     Object.assign(defaultTextStyles, styles[i]);
     if (customStyles) Object.assign(customTextStyles, customStyles[i]);
   });
@@ -46,7 +42,7 @@ const getStyles = (itemType: any, customStyles?: Object): any => {
   return newStyles;
 };
 
-const TextStyled = (props: TextStyledPropsType): any => {
+const TextStyled = (props) => {
   const {
     type,
     customStyles,

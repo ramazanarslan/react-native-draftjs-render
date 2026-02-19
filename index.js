@@ -4,8 +4,6 @@
  * License: MIT
  */
 
-// @flow
-
 import getRNDraftJSBlocks from './src/getBlocks';
 
 module.exports = getRNDraftJSBlocks;
