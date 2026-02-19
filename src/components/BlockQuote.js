@@ -24,7 +24,7 @@ const styles = StyleSheet.create({
 });
 
 const BlockQuote = (props) => {
-  const { customStyles } = props;
+  const { customStyles, key: itemKey, ...restProps } = props;
   const blockquoteCustomStyleContainer = customStyles
     ? customStyles.blockquoteContainer
     : undefined;
@@ -39,7 +39,8 @@ const BlockQuote = (props) => {
     <View style={[styles.blockquoteContainer, blockquoteCustomStyleContainer]}>
       <View style={blockquoteCustomStyleIconBefore} />
       <DraftJsText
-        {...props}
+        key={itemKey}
+        {...restProps}
       />
       <View style={blockquoteCustomStyleIconAfter} />
     </View>

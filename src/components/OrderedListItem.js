@@ -32,6 +32,8 @@ const OrderedListItem = (props) => {
     customStyles,
     depth,
     defaultMarginLeft,
+    key: itemKey,
+    ...restProps
   } = props;
 
   const orderedListItemCustomStyleContainer = customStyles && customStyles.orderedListItemContainer;
@@ -50,7 +52,8 @@ const OrderedListItem = (props) => {
         {separator}
       </Text>
       <DraftJsText
-        {...props}
+        key={itemKey}
+        {...restProps}
       />
     </View>
   );

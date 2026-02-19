@@ -13,9 +13,7 @@ import UnorderedListItem from "./components/UnorderedListItem";
 import OrderedListItem from "./components/OrderedListItem";
 import generateKey from "./utils/generateKey";
 
-export const ViewAfterList = (props) => (
-  <View {...props} />
-);
+export const ViewAfterList = (props) => <View {...props} />;
 
 const getBlocks = (params) => {
   const {
@@ -104,7 +102,7 @@ const getBlocks = (params) => {
     }
 
     return number;
-  }
+  };
 
   return contentState.blocks.map((item) => {
     const itemData = {
@@ -128,11 +126,13 @@ const getBlocks = (params) => {
       case "header-six":
       case "code-block": {
         const viewBefore = checkCounter(counters);
+        const { key: itemKey, ...restItemData } = itemData;
         return (
           <View key={generateKey()}>
             {viewBefore}
             <DraftJsText
-              {...itemData}
+              key={itemKey}
+              {...restItemData}
               entityMap={contentState.entityMap}
               customStyles={customStyles}
               navigate={navigate}
@@ -145,10 +145,16 @@ const getBlocks = (params) => {
 
       case "atomic": {
         if (atomicHandler) {
-          const { AtomicNode, oldType } = atomicHandler(item, contentState.entityMap);
+          const { AtomicNode, oldType } = atomicHandler(
+            item,
+            contentState.entityMap,
+          );
 
           let listIndicator = null;
-          if (oldType === "unordered-list-item") listIndicator = <View style={customStyles.unorderedListItemBullet} />
+          if (oldType === "unordered-list-item")
+            listIndicator = (
+              <View style={customStyles.unorderedListItemBullet} />
+            );
           else if (oldType === "ordered-list-item") {
             const number = getOrderedListItemNumber(oldType, itemData);
             listIndicator = (
@@ -160,7 +166,10 @@ const getBlocks = (params) => {
           }
 
           return (
-            <View key={generateKey()} style={{ flexDirection: "row", alignItems: "center" }}>
+            <View
+              key={generateKey()}
+              style={{ flexDirection: "row", alignItems: "center" }}
+            >
               {listIndicator}
               {AtomicNode}
             </View>
